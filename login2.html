@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <title>Authentication Example</title>
+</head>
+
+<body>
+    <img src="" id='google-pic'>
+    <div>
+        <button onclick="signInWithGoogle()" id="google-signin">
+            <img src="https://user-images.githubusercontent.com/1531669/41761219-0e0e4d80-7629-11e8-9663-aabe62025d57.png" alt="Sign In with Google" width="400">
+        </button>
+    </div>
+    <div>
+        <button onclick="signOut()" id="signout">
+            Signout
+        </button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  
+  <!--Configure firebase-->
+    <script>
+    // Visit https://console.firebase.google.com/project/<your project id>/overview and click on "Add Firebase to your web app"
+    var config = {
+        apiKey: "AIzaSyBwrkKGroLQjiUQOzyEHVbtpE805yap4kY",
+        authDomain: "serverless-ecommerce-website.firebaseapp.com",
+        databaseURL: "https://serverless-ecommerce-website.firebaseio.com",
+        projectId: "serverless-ecommerce-website",
+        storageBucket: "serverless-ecommerce-website.appspot.com",
+        messagingSenderId: "783347743333",
+        appId: "1:783347743333:web:e002e7ba45e925ecb4a48c",
+        measurementId: "G-PFNS64W57D"
+    };
+  firebase.initializeApp(config);
+    </script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

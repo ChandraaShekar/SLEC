@@ -1,0 +1,88 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="demo"></p>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.3/firebase-storage.js"></script>
+
+<script>
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyBwrkKGroLQjiUQOzyEHVbtpE805yap4kY",
+    authDomain: "serverless-ecommerce-website.firebaseapp.com",
+    databaseURL: "https://serverless-ecommerce-website.firebaseio.com",
+    projectId: "serverless-ecommerce-website",
+    storageBucket: "serverless-ecommerce-website.appspot.com",
+    messagingSenderId: "783347743333",
+    appId: "1:783347743333:web:e002e7ba45e925ecb4a48c",
+    measurementId: "G-PFNS64W57D"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var db = firebase.firestore();
+
+// db.collection("users").add({
+//     first: "Alan",
+//     middle: "Mathison",
+//     last: "Turing",
+//     born: 1912
+// })
+// .then(function(docRef) {
+//     console.log("Document written with ID: ", docRef.id);
+// })
+// .catch(function(error) {
+//     console.error("Error adding document: ", error);
+// });
+
+function loadJSON(callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+
+    xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                // Required use of an anonymous callback as .open will NOT return 
+                // a value but simply returns undefined in asynchronous mode
+                callback(xobj.responseText);
+            } else {
+                callback("[{\"Nothing\"}]");
+            }
+        };
+
+    xobj.open('GET', 'items.json', true);
+    // Maybe you require use of an unknown origin.
+    /*xobj.setRequestHeader("Access-Control-Allow-Origin","*");*/
+    xobj.send(null);  
+};
+
+loadJSON(function(response) {
+    // Parse JSON string into object
+    //document.getElementById("demo").innerHTML = JSON.parse(response);
+    // Parse JSON array string into object
+    // document.getElementById("demo").innerHTML = JSON.parse(response);
+    var data = JSON.parse(response);
+    data.forEach((item, i)=> {
+        db.collection("products")
+        .add(item)
+        .then(function(resp){
+            console.log(`Inserted to document ${resp.id}`);
+        }).catch(function(error){
+            console.log(`Found an Error ${resp.id}`);
+        });
+    });
+});
+</script>
+
+</body>
+</html> -->
