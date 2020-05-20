@@ -2,6 +2,9 @@
 
 var fdb = firebase.firestore();
 function addToCart(itemKey, quantity, userId){
+    console.log(itemKey);
+    console.log(quantity);
+    console.log(userId);
     if (localStorage.uid != "null") {
         fdb.collection('cart').add({
             "itemKey": itemKey,

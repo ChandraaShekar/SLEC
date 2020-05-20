@@ -6,10 +6,6 @@ function checkIfLoggedIn(){
             console.log( user )
             var photoURL = user.photoURL
 
-            // localStorage.setItem('photoURL', user.photoURL)
-            // localStorage.setItem('email', user.email)
-            // localStorage.setItem('uid', data.uid)
-
             document.getElementById('google-pic')
                 .setAttribute('src', photoURL)
             
@@ -17,7 +13,8 @@ function checkIfLoggedIn(){
             document.getElementById('google-signin')
             .setAttribute('style', 'display: none; visibility: hidden')                    
             document.getElementById('signout')
-            .setAttribute('style', 'display: inline-block; visibility: visible')                
+            .setAttribute('style', 'display: inline-block; visibility: visible') 
+            localStorage.setItem('uid', user.uid)               
         } else {
             console.log( 'User not signed in.' )
             // do not logged in stuff
@@ -35,9 +32,6 @@ window.onload = function(){
 
 function signOut(){
     firebase.auth().signOut()
-    localStorage.email = null;
-    localStorage.photoURL = null;
-    localStorage.uid = null;
     document.getElementById('google-pic')
     .setAttribute('src', '')
     
@@ -51,9 +45,6 @@ function signInWithGoogle(){
         .then( function(data) {
             console.log(data)
             // var photoURL = data.additionalUserInfo.profile.picture
-            localStorage.setItem('photoURL', data.photoURL)
-            localStorage.setItem('email', data.email)
-            localStorage.setItem('uid', data.uid)
             document.getElementById('google-pic')
                     .setAttribute('src', photoURL)
                     

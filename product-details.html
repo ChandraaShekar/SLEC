@@ -48,10 +48,13 @@
 									<span>US $<span id="productPrice"></span></span>
 									<label>Quantity:</label>
 									<input type="text" value="1" id="productQuantity" />
-									<button type="button" class="btn btn-fefault cart" id="add-to-cart" onclick="cartAdder()">
+									<button class="btn btn-fefault cart" id="add-to-cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
+									<!-- <button class="btn btn-default cart" id="add-to-cart">
+										Add to Cart
+									</button> -->
 								</span>
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
@@ -189,6 +192,7 @@
     <script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/includes.js"></script>
+
 	<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
 	<script src="js/FirebaseAuth.js"></script>
@@ -197,7 +201,7 @@
 	<script>
 		var db = firebase.firestore();
 		console.log(localStorage.currentItem);
-		if(localStorage.currentItem == null){
+		if(localStorage.currentItem == 'null'){
 			window.location.assign('index.html');
 		}
 		db.collection('products').doc(localStorage.currentItem).get().then((querySnap) => {
@@ -212,14 +216,20 @@
 			document.querySelector("#description").innerHTML = data.description;
 		});
 
-		document.querySelector("#add-to-cart").click(function(){
-
+		// document.querySelector("#add-to-cart").click(function(){
+			// addToCart(localStorage.currentItem, quantity, currentUser.uid);
+		// });
+		var quantity = '1';
+		$('#productQuantity').keyup(function(){
+			quantity = $("#productQuantity").val();
+		document.getElementById("add-to-cart").setAttribute("onclick",`addToCart('${localStorage.currentItem}', '${quantity}', '${localStorage.uid}')`);
 		});
-		function cartAdder(){
-			console.log("came here")
-			var quantity = document.querySelector('#productQuantity').value;
-			addToCart(localStorage.currentItem, quantity, localStorage.uid);
-		}
+		document.getElementById("add-to-cart").setAttribute("onclick",`addToCart('${localStorage.currentItem}', '${quantity}', '${localStorage.uid}')`);
+		// function cartAdder(){
+		// 	console.log("came here")
+		// 	// var currentUser = firebase.auth().currentUser()
+		// }
+
 	</script>
 </body>
 </html>
